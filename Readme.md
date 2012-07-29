@@ -54,3 +54,10 @@ If using jQuery in a project, the above functionality would be entirely unnecess
 ```
 
 In this way, the require-selector module here is bypassed completely, made possible by the use of a commonly expected global.
+
+Footprint and benefits
+---
+
+The require-selector module, as well as all its dependencies (including the utility loader module require-is) come to 3KB minified, in contrast to the 14KB Sizzle selector engine.
+
+The major beneift is the ability for libraries not to 'blindly' be dependent on jQuery purely for selector support and click events, allowing for the use of native development and shared code between libraries, freed from the common conceptual constraint of needing a selector engine solution.
