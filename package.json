@@ -1,4 +1,8 @@
 {
   "main": "main",
-  "volo": {}
+  "volo": {
+    "dependencies": {
+      "is": "guybedford/require-is"
+    }
+  }
 }
