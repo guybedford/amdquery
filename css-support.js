@@ -48,49 +48,49 @@ define(function() {
 
   return {
 
-    supportAtRule: impl.hasFeature('CSS2', '') ?
-      function(rule) {
-        if (!(sheet && rule)) return false;
-        var result = false;
-        try {
-          sheet.insertRule(rule, 0);
-          result = !(/unknown/i).test(sheet.cssRules[0].cssText);/* &&
-            sheet.cssRules[0].cssText.replace(/[\s;\\\x22\x27]/g, '') ==
-            rule.replace(/[\s;\\\x22\x27]/g, '');*/
-          sheet.deleteRule(sheet.cssRules.length - 1);
-        } catch(e) { }
-        return result;
-      } :
-      function(rule) {
-        if (!(sheet && rule)) return false;
-        sheet.cssText = rule;
-        return sheet.cssText.length !== 0 &&
-          !(/unknown/i).test(sheet.cssText) &&
-          sheet.cssText.replace(/\r+|\n+/g, '').
-            indexOf(rule.split(' ')[0]) === 0;
-      },
-
-    supportMediaQuery: impl.hasFeature('CSS2', '') ?
-      function(media) {
-        if (!(sheet && media)) return false;
-        var result = false;
-        try {
-          sheet.insertRule(media, 0);
-          result = !(/unknown/i).test(sheet.cssRules[0].cssText);/* &&
-            sheet.cssRules[0].cssText.replace(/[\s;\\\x22\x27]/g, '') ==
-            media.replace(/[\s;\\\x22\x27]/g, '');*/
-          sheet.deleteRule(sheet.cssRules.length - 1);
-        } catch(e) { }
-        return result;
-      } :
-      function(media) {
-        if (!(sheet && media)) return false;
-        sheet.cssText = media;
-        return sheet.cssText.length !== 0 &&
-          !(/unknown/i).test(sheet.cssText) &&
-          sheet.cssText.replace(/\r+|\n+/g, '').
-            indexOf(media.split(' ')[0]) === 0;
-      },
+    //supportAtRule: impl.hasFeature('CSS2', '') ?
+    //  function(rule) {
+    //    if (!(sheet && rule)) return false;
+    //    var result = false;
+    //    try {
+    //      sheet.insertRule(rule, 0);
+    //      result = !(/unknown/i).test(sheet.cssRules[0].cssText);/* &&
+    //        sheet.cssRules[0].cssText.replace(/[\s;\\\x22\x27]/g, '') ==
+    //        rule.replace(/[\s;\\\x22\x27]/g, '');*/
+    //      sheet.deleteRule(sheet.cssRules.length - 1);
+    //    } catch(e) { }
+    //    return result;
+    //  } :
+    //  function(rule) {
+    //    if (!(sheet && rule)) return false;
+    //    sheet.cssText = rule;
+    //    return sheet.cssText.length !== 0 &&
+    //      !(/unknown/i).test(sheet.cssText) &&
+    //      sheet.cssText.replace(/\r+|\n+/g, '').
+    //        indexOf(rule.split(' ')[0]) === 0;
+    //  },
+    //
+    //supportMediaQuery: impl.hasFeature('CSS2', '') ?
+    //  function(media) {
+    //    if (!(sheet && media)) return false;
+    //    var result = false;
+    //    try {
+    //      sheet.insertRule(media, 0);
+    //      result = !(/unknown/i).test(sheet.cssRules[0].cssText);/* &&
+    //        sheet.cssRules[0].cssText.replace(/[\s;\\\x22\x27]/g, '') ==
+    //        media.replace(/[\s;\\\x22\x27]/g, '');*/
+    //      sheet.deleteRule(sheet.cssRules.length - 1);
+    //    } catch(e) { }
+    //    return result;
+    //  } :
+    //  function(media) {
+    //    if (!(sheet && media)) return false;
+    //    sheet.cssText = media;
+    //    return sheet.cssText.length !== 0 &&
+    //      !(/unknown/i).test(sheet.cssText) &&
+    //      sheet.cssText.replace(/\r+|\n+/g, '').
+    //        indexOf(media.split(' ')[0]) === 0;
+    //  },
 
     supportSelector: impl.hasFeature('CSS2', '') ?
       function(selector) {
@@ -107,36 +107,36 @@ define(function() {
         return sheet.cssText.length !== 0 &&
           !(/unknown/i).test(sheet.cssText) &&
           sheet.cssText.indexOf(selector) === 0;
-      },
+      }//,
 
-    supportProperty: impl.hasFeature('CSS2', '') ?
-      function(property, value) {
-        if (!property) return false;
-        var result = false, prop = toCamelCase(property);
-        if (!value && prop in root.style) {
-          return typeof root.style[prop] == 'string';
-        } else {
-          if (!(sheet)) return false;
-          try {
-            sheet.insertRule('WRONG { ' + property + ': auto; }', 0);
-            result = sheet.cssRules[0].cssText.
-              match(/{\s*(.*)\s*}/)[1].length !== 0;
-            sheet.deleteRule(sheet.cssRules.length - 1);
-          } catch(e) { }
-        }
-        return result;
-      } :
-      function(property, value) {
-        if (!(property && sheet)) return false;
-        var name = toCamelCase(property);
-        if (value) {
-          sheet.addRule('div', property + ': ' + value + ';');
-          return sheet.cssText.indexOf(property.toUpperCase()) > - 1;
-                }
-        return name in root.style &&
-          typeof root.style[name] == 'string' ||
-          typeof root.style[name] == 'number';
-      }
+    //supportProperty: impl.hasFeature('CSS2', '') ?
+    //  function(property, value) {
+    //    if (!property) return false;
+    //    var result = false, prop = toCamelCase(property);
+    //    if (!value && prop in root.style) {
+    //      return typeof root.style[prop] == 'string';
+    //    } else {
+    //      if (!(sheet)) return false;
+    //      try {
+    //        sheet.insertRule('WRONG { ' + property + ': auto; }', 0);
+    //        result = sheet.cssRules[0].cssText.
+    //          match(/{\s*(.*)\s*}/)[1].length !== 0;
+    //        sheet.deleteRule(sheet.cssRules.length - 1);
+    //      } catch(e) { }
+    //    }
+    //    return result;
+    //  } :
+    //  function(property, value) {
+    //    if (!(property && sheet)) return false;
+    //    var name = toCamelCase(property);
+    //    if (value) {
+    //      sheet.addRule('div', property + ': ' + value + ';');
+    //      return sheet.cssText.indexOf(property.toUpperCase()) > - 1;
+    //            }
+    //    return name in root.style &&
+    //      typeof root.style[name] == 'string' ||
+    //      typeof root.style[name] == 'number';
+    //  }
 
   };
 });
