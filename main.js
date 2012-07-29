@@ -22,6 +22,6 @@ define(['is!~./selector-test?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.4/
     return sizzle;
   else
     return function(selector, context) {
-      return context.querySelectorAll(selector);
+      return (context || document.body).querySelectorAll(selector);
     }
 });
