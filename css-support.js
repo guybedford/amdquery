@@ -5,8 +5,7 @@
  * https://github.com/dperini/css-support/blob/master/src/css-support.js
  *
  */
-define(function() {
-  
+define([], function() {
   if (typeof window === 'undefined' || typeof window.location === 'undefined')
     return null;
   

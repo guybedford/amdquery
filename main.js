@@ -17,7 +17,7 @@
  * Uses the require-is module to conditionally load sizzle
  *
  */
-define(['is!~./selector-test?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.4/sizzle.min.js'], function(sizzle) {
+define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.4/sizzle.min.js'], function(sizzle) {
   if (sizzle)
     return sizzle;
   else
