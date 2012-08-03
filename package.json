@@ -1,5 +1,6 @@
 {
   "main": "main",
+  "amd": {},
   "volo": {
     "type": "directory",
     "dependencies": {
