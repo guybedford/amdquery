@@ -16,7 +16,7 @@ require(['selector'], function($) {
 Installation
 ---
 
-`volo add guybedford/require-selector`
+`volo add guybedford/selector`
 
 (after `npm install volo -g`)
 
