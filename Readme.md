@@ -47,8 +47,10 @@ If using jQuery in a project, the above functionality would be entirely unnecess
 
 ```javascript
 {
-  paths: {
-    selector: 'jQuery'
+  map: {
+    '*': {
+      selector: 'jquery'
+    }
   }
 }
 ```
