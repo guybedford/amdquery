@@ -55,7 +55,7 @@ If using jQuery in a project, the above functionality would be entirely unnecess
 }
 ```
 
-In this way, the require-selector module here is bypassed completely, made possible by the use of a commonly expected global.
+In this way, the require-selector module here is bypassed completely, made possible by the use of a commonly expected 'selector' global.
 
 Footprint and benefits
 ---
