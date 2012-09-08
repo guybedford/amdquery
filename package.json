@@ -1,10 +1,9 @@
 {
-  "main": "main",
-  "amd": {},
+  "main": "selector",
   "volo": {
     "type": "directory",
     "dependencies": {
-      "is": "guybedford/require-is"
+      "is": "guybedford/is"
     }
   }
 }
