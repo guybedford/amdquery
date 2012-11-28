@@ -15,7 +15,7 @@
  */
 define(['./css-support'], function(cssSupport) {
   //ensure we're in the browser
-  if (typeof window === 'undefined' || typeof window.location === 'undefined')
+  if (typeof window === 'undefined')
     return true;
   
   if (!document.querySelectorAll)
@@ -27,8 +27,6 @@ define(['./css-support'], function(cssSupport) {
     'E[foo]',
     'E[foo="bar"]'
   ];
-  
-  var supported = false;
   
   for (var i = 0; i < cssTests.length; i++)
     if (!cssSupport.supportSelector(cssTests[i]))
