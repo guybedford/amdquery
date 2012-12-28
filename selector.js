@@ -18,10 +18,30 @@
  *
  */
 define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.4/sizzle.min.js'], function(sizzle) {
-  if (sizzle)
-    return sizzle;
-  else
-    return function(selector, context) {
-      return (context || document).querySelectorAll(selector);
-    }
+  var wrappers = [];
+
+  var selector = function(selector, context) {
+    var selected = sizzle ? sizzle(selector, context) : (context || document).querySelectorAll(selector);
+    for (var i = 0; i < wrappers.length; i++)
+      selected = wrappers[i](selected);
+    return selected;
+  }
+  
+  selector.normalize = function(name, normalize) {
+    var names = name.split(',');
+    for (var i = 0; i < names.length; i++)
+      names[i] = normalize(names[i]);
+    return names.join(',');
+  }
+  selector.load = function(name, req, load, config) {
+    var names = name.split(',');
+    req([names], function() {
+      for (var i = 0; i < arguments.length; i++) {
+        if (wrappers.indexOf(arguments[i]) == -1)
+          wrappers.push(arguments[i]);
+      }
+      load(selector);
+    });
+  }
+  return selector;
 });
