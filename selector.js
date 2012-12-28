@@ -21,7 +21,11 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.
   var wrappers = [];
 
   var selector = function(selector, context) {
-    var selected = sizzle ? sizzle(selector, context) : (context || document).querySelectorAll(selector);
+    var selected;
+    if (typeof selector != 'string')
+      selected = selector;
+    else
+      selected = sizzle ? sizzle(selector, context) : (context || document).querySelectorAll(selector);
     for (var i = 0; i < wrappers.length; i++)
       selected = wrappers[i](selected);
     return selected;
