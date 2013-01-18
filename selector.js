@@ -27,25 +27,29 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.
     else
       selected = sizzle ? sizzle(selector, context) : (context || document).querySelectorAll(selector);
     
-    for (var i = 0; i < wrappers.length; i++) {
+    for (var i = 0; i < wrappers.length; i++)
       if (typeof wrappers[i] == 'function')
         selected = wrappers[i](selected);
-    }
-
-    for (var i = 0; i < wrappers.length; i++) {
-      if (typeof wrappers[i] == 'object')
+      else if (typeof wrappers[i] == 'object')
         for (var p in wrappers[i]) {
           var curFunc = wrappers[i][p];
-          selected[p] = function() {
-            curFunc.apply(arguments[0], Array.prototype.splice.call(arguments, 1));
-          }
+          if (typeof curFunc == 'function')
+            selected[p] = function() {
+              Array.prototype.splice.call(arguments, 0, 0, this);
+              curFunc.apply(this, arguments);
+            }
         }
-    }
+    
     return selected;
   }
 
   selector.addWrapper = function(wrapper) {
-    wrappers.push(wrapper);
+    if (wrapper.setSelectorEngine)
+      wrapper.setSelectorEngine(selector);
+    if (wrapper.setQueryEngine)
+      wrapper.setQueryEngine(selector);
+    if (wrappers.indexOf(wrapper) == -1)
+      wrappers.push(wrapper);
   }
   
   selector.normalize = function(name, normalize) {
@@ -61,13 +65,7 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.4.
         var wrapper = arguments[i];
         if (!wrapper)
           continue;
-        if (wrappers.indexOf(wrapper) == -1) {
-          wrappers.push(wrapper);
-          if (wrapper.setSelectorEngine)
-            wrapper.setSelectorEngine(selector);
-          if (wrapper.setQueryEngine)
-            wrapper.setQueryEngine(selector);
-        }
+        selector.addWrapper(wrapper);
       }
       load(selector);
     });
