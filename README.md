@@ -34,11 +34,12 @@ Currently Supported Query Methods
 
 Currently, the following query method libraries are supported:
 
-* [Bean](https://github.com/fat/bean) (bridge module)
+[Bean](https://github.com/fat/bean) (bridge module)
   * Provides cross-platform event support such as `click` and `mousemove`.
   * Bridge library: https://github.com/guybedford/bean-amd (`volo add guybedford/bean-amd`)
 
-* [Bonzo](https://github.com/ded/bonzo) (bridge module)
+
+[Bonzo](https://github.com/ded/bonzo) (bridge module)
   * Provides cross-platform DOM utilities such as `css`, `offset`, `attr`, `append`, `addClass`
   * Bridge library: https://github.com/guybedford/bonzo-amd (`volo add guybedford/bonzo-amd`)
 
