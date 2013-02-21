@@ -66,17 +66,27 @@ Pluggable Selector Functionality
 --------------------------------
 
 Then provides a plugin API for loading selector-compatible modules for modular selector functionality
-loaded with the syntax 'selecta!moduleName'
+loaded with the syntax 'amdquery!moduleName'
 
-For example, an event module can provide the $('div#myelement').click(function(){...})
-functionality with a module of the form:
- 
+For example, an event module can provide the click event method as:
+
 click.js:
+```javascript
 define({
   click: function(els, callback) {
     els[0].addEventListener('click', callback);
   }
 });
+```
+
+which can then be used with:
+
+app.js:
+```javascript
+require(['amdquery!click'], function($) {
+  $('#myel').click(function(){ /* etc */ });
+});
+```
 
 The general format is that the selector functionality module is an object with methods,
 each method taking the element array as its first argument.

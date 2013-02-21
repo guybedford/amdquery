@@ -3,6 +3,8 @@
  *
  * An AMD DOM utility plugin.
  *
+ * https://github.com/guybedford/amdquery
+ *
  *
  * Cross-browser Selection
  * -----------------------
@@ -35,12 +37,17 @@
  *     els[0].addEventListener('click', callback);
  *   }
  * });
+ *
+ * app.js:
+ * define(['amdquery!click'], function($) {
+ *   $('div#myelement').click(function(){...});
+ * });
  * 
  * The general format is that the selector functionality module is an object with methods,
  * each method taking the element array as its first argument.
  *
  * To create or submit query methods, see the submission guidelines and examples page at
- * https://github.com/guybedford/AMD-query
+ * https://github.com/guybedford/amdquery
  *
  *
  * Builds
@@ -88,6 +95,8 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
 
     for (var i = 0, len = results.length; i < len; i++)
       selected[i] = results[i];
+
+    selected.length = results.length;
     
     return selected;
   }
