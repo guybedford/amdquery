@@ -1,7 +1,7 @@
 AMD Query
 ===
 
-An AMD DOM utility plugin / modular jQuery AMD replacement.
+An AMD DOM utility plugin.
 
 Conditionally polyfills the native selector engine, and is compatible with modular
 query methods to provide DOM traversal, events, animations, etc.

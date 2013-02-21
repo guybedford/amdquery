@@ -1,7 +1,7 @@
 /*
  * AMD Query
  *
- * An AMD DOM utility plugin / modular jQuery AMD replacement.
+ * An AMD DOM utility plugin.
  *
  *
  * Cross-browser Selection
