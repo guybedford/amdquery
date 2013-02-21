@@ -102,15 +102,14 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
   }
 
   selector.addMethods = function(methodObj) {
-    for (var methodName in methodObj) {
-      var method = methodObj[methodName];
+    for (var methodName in methodObj) (function(method) {
       selectorProto[methodName] = function() {
         // add els array as the first argument
         var args = Array.prototype.splice.call(arguments, 0);
         args.unshift(this);
         return method.apply(this, args);
       }
-    }
+    })(methodObj[methodName]);
   }
   
   selector.normalize = function(name, normalize) {
