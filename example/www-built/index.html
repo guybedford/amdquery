@@ -1,0 +1,17 @@
+<!doctype html>
+<script>
+  var require = {
+    baseUrl: '.',
+    map: {
+      '*': {
+        'amdquery': '../../amdquery',
+        'is': 'require-is/is'
+      }
+    }
+  };
+</script>
+<script src="require.js"></script>
+<div class="test">Click me</div>
+<script>
+  require(['app']);
+</script>

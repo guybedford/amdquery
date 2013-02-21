@@ -1,0 +1,1 @@
+define({click:function(e,t){e[0].addEventListener("click",t)}});

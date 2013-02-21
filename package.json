@@ -1,5 +1,5 @@
 {
-  "main": "selector",
+  "main": "amdquery",
   "volo": {
     "type": "directory",
     "dependencies": {

@@ -1,7 +1,7 @@
 /*
- * AMD-query
+ * AMD Query
  *
- * An AMD DOM utility plugin.
+ * An AMD DOM utility plugin / modular jQuery AMD replacement.
  *
  *
  * Cross-browser Selection
@@ -59,7 +59,7 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
   var uid = 'amd-selector-context';
 
   // generate the selector constructor to use for instances
-  var selectorClass = function(){}
+  var selectorClass = function amdquery(){}
   var selectorProto = new Array();
   selectorClass.prototype = selectorProto;
 
@@ -97,7 +97,8 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
       var method = methodObj[methodName];
       selectorProto[methodName] = function() {
         // add els array as the first argument
-        var args = Array.prototype.unshift.call(arguments, this);
+        var args = Array.prototype.splice.call(arguments, 0);
+        args.unshift(this);
         return method.apply(this, args);
       }
     }
