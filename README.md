@@ -90,10 +90,6 @@ require(['amdquery!click'], function($) {
 
 The general format is that the selector functionality module is an object with methods,
 each method taking the element array as its first argument.
- 
-To create or submit query methods, see the submission guidelines and examples page at
-https://github.com/guybedford/AMD-query
-
 
 
 
