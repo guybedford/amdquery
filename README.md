@@ -65,7 +65,7 @@ contextual selectors of the form: $('> child', context)
 Pluggable Selector Functionality
 --------------------------------
 
-Then provides a plugin API for loading selector-compatible modules for modular selector functionality
+AMD Query provides a plugin API for loading selector-compatible modules for modular selector functionality
 loaded with the syntax 'amdquery!moduleName'
 
 For example, an event module can provide the click event method as:
@@ -73,8 +73,10 @@ For example, an event module can provide the click event method as:
 click.js:
 ```javascript
 define({
-  click: function(els, callback) {
-    els[0].addEventListener('click', callback);
+  prototype: {
+    click: function(callback) {
+      this[0].addEventListener('click', callback);
+    }
   }
 });
 ```
@@ -88,9 +90,26 @@ require(['amdquery!click'], function($) {
 });
 ```
 
-The general format is that the selector functionality module is an object with methods,
-each method taking the element array as its first argument.
+Static methods can be provded outside of the `prototype` property with:
 
+static.js
+```javascript
+define({
+  staticMethod: function() { /* ... */ }
+});
+```
+
+which can be used as:
+
+```javascript
+require(['amdquery!static'], function($) {
+  $.staticMethod('...');
+});
+```
+
+All combinations of query method bundles are generated uniquely to avoid namespace collissions.
+
+This allows separate modules to define the same `click` method for example without clashing.
 
 
 Builds
