@@ -1,5 +1,7 @@
 define({
-  click: function(els, callback) {
-    els[0].addEventListener('click', callback);
+  prototype: {
+    click: function(callback) {
+      this[0].addEventListener('click', callback);
+    }
   }
 });
