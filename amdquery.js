@@ -97,7 +97,18 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
       }
     }
 
-    var results = document.querySelectorAll(selector);
+    // if no parent node (outside the dom) then create one
+    var container;
+    if (!context.parentNode) {
+      container = document.createDocumentFragment();
+      container.appendChild(context);
+    }
+
+    var results = (context ? container || context.parentNode : document).querySelectorAll(selector);
+
+    // remove the dummy container if created
+    if (container)
+      container.removeChild(context);
 
     // return the id if changed for context
     if (context && context.id == uid)
