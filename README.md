@@ -26,7 +26,22 @@ Installation
 
 This will also download the require-is loader module dependency.
 
-If not using volo, download amdquery and require-is into their folders in the main library folder. Then ensure that 'selector' is added in the requirejs map config to point to the file 'require-selector/main'.
+When in an AMD project, Volo will automatically generate wrapper modules at `is.js` and `amdquery.js` for the folder files.
+
+If not using Volo, download amdquery and require-is into their folders in the main library folder. 
+
+Then ensure that `amdquery` and `is` are added in the requirejs map config:
+
+```
+{
+  map: {
+    '*': {
+      is: 'require-is/is',
+      amdquery: 'amdquery/amdquery'
+    }
+  }
+}
+```
 
 
 Currently Supported Query Methods
