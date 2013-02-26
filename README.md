@@ -43,6 +43,10 @@ Currently, the following query method libraries are supported:
   * Provides cross-platform DOM utilities such as `css`, `offset`, `attr`, `append`, `addClass`
   * Bridge library: https://github.com/guybedford/bonzo-amd (`volo add guybedford/bonzo-amd`)
 
+[Morpheus](https://github.com/ded/morpheus) (bridge module)
+  * Provides animations and tweens.
+  * Bridge library: https://github.com/guybedford/morpheus-amd (`volo add guybedford/morpheus-amd`)
+
 To submit a new query method module, submit a pull request.
 
 
@@ -90,12 +94,12 @@ require(['amdquery!click'], function($) {
 });
 ```
 
-Static methods can be provded outside of the `prototype` property with:
+Static methods can be provided outside of the `prototype` property with:
 
 static.js
 ```javascript
 define({
-  staticMethod: function() { /* ... */ }
+  ready: function() { /* ... */ }
 });
 ```
 
@@ -103,7 +107,7 @@ which can be used as:
 
 ```javascript
 require(['amdquery!static'], function($) {
-  $.staticMethod('...');
+  $.ready('...');
 });
 ```
 
