@@ -99,7 +99,7 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
 
     // if no parent node (outside the dom) then create one
     var container;
-    if (!context.parentNode) {
+    if (context && !context.parentNode) {
       container = document.createDocumentFragment();
       container.appendChild(context);
     }
