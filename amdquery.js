@@ -66,8 +66,23 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
   var uid = 'amd-selector-context';
 
   var select = function(selector, context) {
+    if (typeof selector != 'string' || selector.substr(0, 1) == '<') {
+      if (selector instanceof Array || selector instanceof NodeList)
+        for (var i = 0; i < selector.length; i++) {
+          this[i] = selector[i];
+          this.length = selector.length;
+        }
+      else if (selector instanceof Node) {
+        this[0] = selector;
+        this.length = 1;
+      }
+      else if (this.constructor.construct)
+        this.constructor.construct.apply(this, arguments);
+      return this;
+    }
+
     if (sizzle)
-      return sizzle(selector, context, selected);
+      return sizzle(selector, context, this);
 
     // if doing a contextual selector, create a temporary id on the contextual element
     // then run a global selector on that
