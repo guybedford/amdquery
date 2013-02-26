@@ -67,17 +67,19 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
 
   var select = function(selector, context) {
     if (typeof selector != 'string' || selector.substr(0, 1) == '<') {
-      if (selector instanceof Array || selector instanceof NodeList)
+      if (selector instanceof Array || selector instanceof NodeList) {
         for (var i = 0; i < selector.length; i++) {
           this[i] = selector[i];
           this.length = selector.length;
         }
+      }
       else if (selector instanceof Node) {
         this[0] = selector;
         this.length = 1;
       }
-      else if (this.constructor.construct)
-        this.constructor.construct.apply(this, arguments);
+      else if (this.constructor.construct) {
+        return this.constructor.construct.apply(this.constructor, arguments);
+      }
       return this;
     }
 
@@ -153,28 +155,27 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
 
     // if not, create a new selector class for this bundle
     req(bundle, function() {
-      var Selector = function(selector, context) {
-        select.call(this, selector, context);
-      }
-
       // named for consistency in function names
       // so that require('amdquery') looks identical to require('amdquery!click')
       function amdquery(selector, context) {
-        return new Selector(selector, context);
+        if (this.constructor !== amdquery && this.constructor !== Array)
+          return new amdquery(selector, context);
+        this.constructor = amdquery;
+        return select.call(this, selector, context);
       }
 
       // extend the base methods
       for (var i = 0; i < bundle.length; i++)
         for (var p in arguments[i])
-          Selector[p] = arguments[i][p]
+          amdquery[p] = arguments[i][p]
 
-      Selector.prototype = new Array();
+      amdquery.prototype = new Array();
 
       // extend the prototype methods
       for (var i = 0; i < bundle.length; i++)
         if (arguments[i].prototype)
           for (var p in arguments[i].prototype)
-            Selector.prototype[p] = arguments[i].prototype[p];
+            amdquery.prototype[p] = arguments[i].prototype[p];
 
       // store the bundle
       selectorBundles.push({
