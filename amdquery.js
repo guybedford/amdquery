@@ -166,6 +166,8 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
 
     // if not, create a new selector class for this bundle
     req(bundle, function() {
+      if (config.isBuild)
+        return;
       // named for consistency in function names
       // so that require('amdquery') looks identical to require('amdquery!click')
       function amdquery(selector, context) {
