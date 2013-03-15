@@ -145,7 +145,9 @@ Uses the require-is module to conditionally load sizzle.
 Footprint
 ---
 
-The amdquery module on its own, without any query methods, as well as all its dependencies (including the utility loader module require-is) come to 3KB minified, in contrast to the 14KB Sizzle selector engine.
+2.7KB minified and gzipped, in contrast to 33KB for jQuery.
+
+So for example if you just need DOM events with Bean, only download 6.7KB instead of 33KB.
 
 License
 ---
