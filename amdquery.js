@@ -149,7 +149,7 @@ define(['is!~./native-selector?http://cdnjs.cloudflare.com/ajax/libs/sizzle/1.9.
       var bundleMatch = true;
       
       for (var j = 0; j < selectorBundles[i].bundle.length; j++)
-        if (bundle.indexOf(selectorBundles[i].bundles[j]) == -1) {
+        if (bundle.indexOf(selectorBundles[i].bundle[j]) == -1) {
           bundleMatch = false;
           break;
         }
