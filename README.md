@@ -3,6 +3,8 @@ AMD Query
 
 An AMD DOM utility plugin.
 
+**No longer maintained, or advised for use.**
+
 Conditionally polyfills the native selector engine, and is compatible with modular
 query methods to provide DOM traversal, events, animations, etc.
 
